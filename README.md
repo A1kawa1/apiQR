@@ -1,10 +1,10 @@
 # apiQR
-Это микросервис для генирации qr-кодов на оплату в банках по реквизитам получателя.
-На текущий момент работает на `qr-api.xlombard.ru:48855`
-Пример генерации:
-`http://qr-api.xlombard.ru:48855/v1/?token=6F9619FF-8B86-D011-B42D-00CF4FC964FF&Name=ООО+Ломбард+автомобильный+«Залог+24»&PersonalAcc=40702810403000036124&BankName=ПАО+"ПРОМСВЯЗЬБАНК"&PayeeINN=5254492098&KPP=770345001&BIC=042202803&CorrespAcc=30101810700000000803&Sum=50000&Purpose=Оплата+по+договору+№ЛА+№000567%2C+Кирбашян+Валерий+Ашотович&size=500`
-Пример получения:
-`http://qr-api.xlombard.ru:48855/result/6F9619FF-8B86-D0/2023-04-20/5f2bd98c-df9d-11ed-95c5-5cb901fe8117.png`
+Это микросервис для генирации qr-кодов на оплату в банках по реквизитам получателя.  
+На текущий момент работает на `qr-api.xlombard.ru:48855`  
+Пример генерации:  
+`http://qr-api.xlombard.ru:48855/v1/?token=6F9619FF-8B86-D011-B42D-00CF4FC964FF&Name=ООО+Ломбард+автомобильный+«Залог+24»&PersonalAcc=40702810403000036124&BankName=ПАО+"ПРОМСВЯЗЬБАНК"&PayeeINN=5254492098&KPP=770345001&BIC=042202803&CorrespAcc=30101810700000000803&Sum=50000&Purpose=Оплата+по+договору+№ЛА+№000567%2C+Кирбашян+Валерий+Ашотович&size=500`  
+Пример получения:  
+`http://qr-api.xlombard.ru:48855/result/6F9619FF-8B86-D0/2023-04-20/5f2bd98c-df9d-11ed-95c5-5cb901fe8117.png`  
 
 ## Этапы установки
 
@@ -16,22 +16,22 @@
 
 4. Установить `Django==3.2`, `djangorestframework==3.12.4`,`Pillow`, `qrcode`, `uuid`, `modwsgi` (файл `requirements.bat`)
 
-5. В терминале выполнить `mod_wsgi-express module-config`, после скопировать полученные данные и изменить `httpd.conf.template`.
-Так же изменить `WSGIScriptAlias` на путь к `wsgi.py`.
-`WSGIPythonPath` на путь расположения `manage.py`.
-`<Directory "D:/apiQR/apiQR/apiQR/">` изменить на путь расположения `wsgi.py`.
-`ServerName 192.145.97.71:48855` изменить на соотвествующие данные.
-В `Apache24/conf/httpd.conf` изменить `Listen 48855` на нужный порт.
-Полученный конфиг `httpd.conf.template` вставить(заменить) в конце файла `Apache24/conf/httpd.conf`.
-В файле `Apache24/conf/httpd.conf` заменить:
+5. В терминале выполнить `mod_wsgi-express module-config`, после скопировать полученные данные и изменить `httpd.conf.template`.  
+Так же изменить `WSGIScriptAlias` на путь к `wsgi.py`.  
+`WSGIPythonPath` на путь расположения `manage.py`.  
+`<Directory "D:/apiQR/apiQR/apiQR/">` изменить на путь расположения `wsgi.py`.  
+`ServerName 192.145.97.71:48855` изменить на соотвествующие данные.  
+В `Apache24/conf/httpd.conf` изменить `Listen 48855` на нужный порт.  
+Полученный конфиг `httpd.conf.template` вставить(заменить) в конце файла `Apache24/conf/httpd.conf`.  
+В файле `Apache24/conf/httpd.conf` заменить:  
 <Directory />
     Options FollowSymLinks
     AllowOverride None
     Order deny,allow
     Deny from all
-</Directory>
+</Directory>  
 
-на
+на  
 
 <Directory />
     Options Indexes FollowSymLinks Includes ExecCGI
