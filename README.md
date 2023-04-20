@@ -1,4 +1,48 @@
 # apiQR
+Это микросервис для генирации qr-кодов на оплату в банках по реквизитам получателя.
+
+## Этапы установки
+
+1. Загрузите и установите Apache 2.4 в папку C:/Apache24 (https://www.apachelounge.com/download/)
+
+2. Установить Microsoft C++ Build Tools(https://visualstudio.microsoft.com/visual-cpp-build-tools/)
+
+3. Установить `Python` (создавать виртуальное окружение не нужно)
+
+4. Установить `Django==3.2`, `djangorestframework==3.12.4`,`Pillow`, `qrcode`, `uuid`, `modwsgi` (файл `requirements.bat`)
+
+5. В терминале выполнить `mod_wsgi-express module-config`, после скопировать полученные данные и изменить `httpd.conf.template`.
+Так же изменить `WSGIScriptAlias` на путь к `wsgi.py`.
+`WSGIPythonPath` на путь расположения `manage.py`.
+`<Directory "D:/apiQR/apiQR/apiQR/">` изменить на путь расположения `wsgi.py`.
+`ServerName 192.145.97.71:48855` изменить на соотвествующие данные.
+В `Apache24/conf/httpd.conf` изменить `Listen 48855` на нужный порт.
+Полученный конфиг `httpd.conf.template` вставить(заменить) в конце файла `Apache24/conf/httpd.conf`.
+В файле `Apache24/conf/httpd.conf` заменить:
+<Directory />
+    Options FollowSymLinks
+    AllowOverride None
+    Order deny,allow
+    Deny from all
+</Directory>
+
+на
+
+<Directory />
+    Options Indexes FollowSymLinks Includes ExecCGI
+    AllowOverride All
+    Require all granted
+</Directory>
+
+Дописать в конец
+Alias "/result" "D:/apiQR/result/"
+<Directory "D:/apiQR/result/">
+    AllowOverride All
+    Require all granted
+</Directory>
+указав путь к папке расположения сохранения qr кодов.
+
+7. В `apiQR/apiQR/settings.py` заменить `PATH_DIR_QR` на желаемый путь сохранения qr кодов.
 
 ## Примеры и требования запросов
 ### Запрос на создание
